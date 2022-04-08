@@ -9,4 +9,3 @@ data=cursor.fetchone()
 print("Connection established to: ",data)
 
 conn.close()
- 
