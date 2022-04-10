@@ -1,8 +1,10 @@
-import pandas
+import pandas as pd
+import psycopg2
 import matplotlib.pyplot as plt
 from sqlalchemy import create_engine
-
-engine = create_engine("postgresql:///?User=postgres&;Password=bkc12278895&Database=sbx_test&Server=localhost&Port=5432")
-df = pandas.read_sql("SELECT year, total_waste FROM waste_table", engine)
-df.plot(kind="line", x="total_waste",y="year")
+conn = psycopg2.connect(database="sbx_test", user='postgres',
+                        password='bkc!12278895', host='localhost', port='5432')
+sql = "SELECT * FROM waste_table"
+dat = pd.read_sql_query(sql, conn)
+dat.plot(kind="bar", x="year", y="total_waste")
 plt.show()
